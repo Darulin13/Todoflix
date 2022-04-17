@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Todos from "./pages/Todos"
+import Main from "./Main"
 
 const Container = styled.header`
     height:10vh;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    border:solid red;
     align-items:center;
 `
 
@@ -15,19 +17,23 @@ const LeftBar = styled.section`
     display:flex;
     flex-direction:row;
     justify-content:space-evenly;
+    align-items:center;
 
-    summary::-webkit-details.market{
-
-    }
     summary{
         color:white;
+       
     }
-    div{
-        diplay:flex;
+    details{
+ 
+        display:flex;
         flex-direction:column;
         justify-content:space-evenly;
-        border:solid white;
-        height:30vh;
+    }
+    div{
+        color:white;
+        position: absolute;
+        z-index: 1;
+      
     }
     p{
         color:white
@@ -65,7 +71,7 @@ const Button = styled.button`
     border-radius:4px;
     width:20%;
 
-` 
+`
 const Perfil = styled.img`
     width:5%;
     border:solid blue;
@@ -73,34 +79,38 @@ const Perfil = styled.img`
 
 `
 
-export default class Header extends React.Component {
-    state = {
 
-    }
+export default class Header extends React.Component {
+
     render() {
         return (
-            <Container>
-                <LeftBar>
-                    <img src="" alt="logo" />
-                    <Title>Início</Title>
-                    <details>
-                        <summary>Categorias</summary>
-                        <div>
-                                                   <p>Todos</p>
-                        <p>Favoritos</p>
-                        <p>Já vistos</p>
-                        <p>Adicionados</p> 
-                        </div>
+            <Router>
+                <Container>
+                    <LeftBar>
+                        <img src="" alt="logo" />
+                        <Title>Início</Title>
+                        <details>
+                            <summary>Categorias</summary>
+                            <div>
+                                <Link to="/Todos" ><p>Todos</p></Link>
+                                <Link to="/Favoritos" >  <p>Favoritos</p></Link>
+                                <Link to="/Vistos" ><p>Já vistos</p></Link>
+                                <Link to="/Adicionados" > <p>Adicionados</p></Link>
+                            </div>
+                        </details>
+                    </LeftBar>
+                    <RightBar>
+                        <Button> Adicionar filme</Button>
+                        <Input placeholder="Pesquisar" />
+                        <Perfil src="" alt="logo" />
+                    </RightBar>
+                </Container>
+                <Main />
+                <Routes>
+                    <Route path="/Todos" element={<Todos />} />
+                </Routes>
+            </Router>
 
-                    </details>
-                </LeftBar>
-                <RightBar>
-                    <Button> Adicionar filme</Button>
-                    <Input placeholder="Pesquisar"/>
-                    <Perfil src="" alt="logo" />
-                </RightBar>
-
-            </Container>
         )
     }
 }

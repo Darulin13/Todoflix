@@ -34,6 +34,8 @@ const Text = styled.div`
     }
     img{
         width:5%;
+        cursor:pointer;
+
     }
 `
 const Film = styled.article`
@@ -54,6 +56,17 @@ const Banner = styled.section`
 `
 
 export default class Main extends React.Component {
+    state = {
+        favorito: false,
+
+    }
+
+    handleFavorite = () => {
+        this.setState({
+            favorito: !this.state.favorito
+        })
+
+    }
     render() {
         return (
             <Container>
@@ -62,7 +75,7 @@ export default class Main extends React.Component {
                         <img src="https://media.graphassets.com/CEHvNDY1SBKkmEbYpTOl" alt="Capitão" />
                     </Banner>
                     <Text>
-                        <img src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" />
+                        <img src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={this.handleFavorite} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
                         <p>Visto recentemente</p>
                         <h2>Capitão Fantástico</h2>
                         <p>Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.</p>

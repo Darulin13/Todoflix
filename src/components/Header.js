@@ -221,6 +221,7 @@ const Close = styled.button`
     justify-content:center;
     font-size:15px;
     border:none;
+    cursor:pointer;
 
     `
 
@@ -334,7 +335,6 @@ export default class Header extends React.Component {
                                     size={50}
                                     color ={"none"}
                                     activeColor ={"#83BD75"}
-                                    
                                     edit={true}
                                 />
                             </Text>   

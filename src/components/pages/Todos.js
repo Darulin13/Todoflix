@@ -84,6 +84,8 @@ const Card = styled.div`
     }
 
 `
+const Icon = styled.img`
+    width:5%;`
 
 
 export default class Todos extends React.Component {
@@ -124,10 +126,25 @@ export default class Todos extends React.Component {
         ],
         listFilms: [],
         open: false,
+        favorito:false,
+        favoriteFilms:[],
     }
 
     OpenCard = () => {
         this.setState({ open: !this.state.open })
+
+    }
+    handleFavorite = () => {
+        this.setState({
+            favorito: !this.state.favorito
+        })
+       // const Films = this.state.Films((item)=> item===id)
+      //  this.setState({
+//favoriteFilms:this.state.Films.concat(Films)
+     //   })
+       // console.log(this.state.favoriteFilms)
+      
+       
 
     }
 
@@ -144,13 +161,6 @@ export default class Todos extends React.Component {
 
                         </Card>
                     ))}
-
-
-
-
-
-
-
                 <nav>
                     <h1>Destaques</h1>
                     <Carousel
@@ -166,7 +176,10 @@ export default class Todos extends React.Component {
                         }}>
                         {this.state.Films.map((item) => (
                             <Box >
-                                <Poster src={item.img} alt={item.title} onClick={this.OpenCard} />
+                                <Poster src={item.img} alt={item.title} onClick={this.OpenCard} >
+                              
+                                </Poster>
+                                <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={this.handleFavorite} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }}/>
                                 <h2>{item.title}</h2>
                                 <p>{item.paragraph}</p>
                             </Box>

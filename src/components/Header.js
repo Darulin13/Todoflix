@@ -25,12 +25,12 @@ const LeftBar = styled.section`
         cursor:pointer;
     }
     details{
- 
         display:flex;
         flex-direction:column;
         justify-content:space-evenly;
        
     }
+    
     div{
         color:white;
         position: absolute;
@@ -79,9 +79,19 @@ const Button = styled.button`
     width:20%;
    cursor:pointer;
 `
-const Perfil = styled.img`
-    width:5%;
+const Perfil = styled.details`
+    width:10%;
     cursor:pointer;
+   
+    color:white;
+    display:flex;
+    flex-direction:row-reverse;
+    justify-content:center;
+   
+ 
+    img{
+        width:50%;
+    }
 `
 const Logo = styled.img`
 border:none;
@@ -143,10 +153,27 @@ const Form = styled.form`
     width:60%;
     align-self:center;
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     justify-content:space-evenly;
-    padding-top:50px;
-    padding-bottom:50px;
+    padding-top:20px;
+   
+    article{
+        display:flex;
+        flex-direction:row;
+        justify-content:space-evenly;
+        padding-top:40px;
+        padding-bottom:40px;
+    }
+    h3{
+
+        padding-left:55px;
+        padding-top:20px;
+        font-size:25px;
+        font-weight:300;
+    }
+    
+    
+
     
 `
 const Center = styled.section`
@@ -169,11 +196,6 @@ const Text = styled.div`
         padding-bottom:10px;
         padding-top:10px; 
     }
-    h3{
-        font-weight:400;
-        padding-bottom:30px;
-        font-size:25px;
-    }
    
     `
 const Name = styled.input`
@@ -190,7 +212,8 @@ const Description = styled.input`
     border:none;
     width:100%;
     padding-bottom:30px;
-    border-radius:5px;`
+    border-radius:5px;
+    `
 
 const Select = styled.select`
     background-color:gray;
@@ -224,6 +247,43 @@ const Close = styled.button`
     cursor:pointer;
 
     `
+const Buttons = styled.div`
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    justify-content:center;
+    padding-top:20px;
+    padding-bottom:10px;
+    
+    `
+const Cancelar = styled.button`
+    color:white;
+    border:none;
+    border-radius:4px;
+    width:20%;
+    cursor:pointer; 
+    padding-top:10px;
+    padding-bottom:10px;
+
+`
+const Confirmar = styled.button`
+    color:white;
+    background-color:red;
+    border:none;
+    border-radius:4px;
+    width:20%;
+    cursor:pointer; 
+    padding-top:10px;
+    padding-bottom:10px;
+
+`
+const Novos = styled.section`
+    color:white;
+    p{
+        color:white;
+    }
+`
+
 
 
 export default class Header extends React.Component {
@@ -261,11 +321,13 @@ export default class Header extends React.Component {
         ],
         listFilms: [],
         open: false,
+        newFilm: "",
+        newDescription: "",
+        listNewfilm: [],
     }
-
+    //Filtro de pesquisa
     Search = (event) => {
         const { Films } = this.state;
-
         const filterFilms = Films.filter((item) => {
             if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
                 return true;
@@ -275,12 +337,38 @@ export default class Header extends React.Component {
         this.setState({
             listFilms: filterFilms
         })
-
     }
-    Add = () => {
+    // Modal do botão de adicionar
+    Modal = () => {
         this.setState({
             open: !this.state.open
         })
+    }
+    // Recebendo valor do input
+    handleName = (event) => {
+        this.setState({
+            newFilm: event.target.value,
+        })
+    }
+
+    handleDescription = (event) => {
+        this.setState({
+            newDescription: event.target.value
+
+        })
+    }
+    handleChange
+    // Criando lista dos filmes novos
+    Add = (event) => {
+        this.setState({
+            listNewfilm: this.state.listNewfilm.concat({
+                newFilm: this.state.newFilm,
+                newDescription: this.state.newDescription,
+                id: Date.now(),
+                open: false,
+            })
+        })
+        event.preventDefault();
 
     }
 
@@ -302,11 +390,18 @@ export default class Header extends React.Component {
                         </details>
                     </LeftBar>
                     <RightBar>
-                        <Button onClick={this.Add}> Adicionar filme
+                        <Button onClick={this.Modal}> Adicionar filme
 
                         </Button>
                         <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
-                        <Perfil src="https://media.graphassets.com/S6bPJf2RqqOQKkeawGgg" alt="login" />
+                        <Perfil>
+                            <summary>
+                                <img src="https://media.graphassets.com/S6bPJf2RqqOQKkeawGgg" alt="login" /> </summary>
+                            <div>
+dvsdvsdv
+                            </div>
+                        </Perfil>
+
                     </RightBar>
                 </Container>
 
@@ -314,34 +409,38 @@ export default class Header extends React.Component {
                     <Center>
 
                         <Form>
-                
-                            <Text>
                             <Close>X</Close>
-                                <h3>Editar dados</h3>
-                                <label>Nome</label>
-                                <Name required type="text" />
-                                <label>Descrição</label>
-                                <Description required type="text" />
-                                <label>Status</label>
-                                <Select required >
-                                    <option>Já assiti</option>
-                                    <option>Ainda não assiti</option>
+                            <h3>Adicionar Filme</h3>
+                            <article>
+                                <Text>
 
-                                </Select>
-                                <label>Nota</label>
-                                <ReactStars
-                                    count={5}
-                                    char={"★"}
-                                    size={50}
-                                    color ={"none"}
-                                    activeColor ={"#83BD75"}
-                                    edit={true}
-                                />
-                            </Text>   
-                                     
-                            <Image>
+                                    <label>Nome</label>
+                                    <Name required type="text" onChange={this.handleName} />
+                                    <label>Descrição</label>
+                                    <Description required type="text" onChange={this.handleDescription} />
+                                    <label>Status</label>
+                                    <Select required >
+                                        <option>Já assiti</option>
+                                        <option>Ainda não assiti</option>
+                                    </Select>
+                                    <label>Nota</label>
+                                    <ReactStars
+                                        count={5}
+                                        char={"★"}
+                                        size={50}
+                                        color={"none"}
+                                        activeColor={"#83BD75"}
+                                        edit={true}
+                                    />
+                                </Text>
+                                <Image>
+                                </Image>
+                            </article>
+                            <Buttons>
+                                <Cancelar>Cancelar</Cancelar>
+                                <Confirmar onClick={this.Add}>Confirmar</Confirmar>
+                            </Buttons>
 
-                            </Image>
                         </Form>
                     </Center>
                 )}
@@ -359,9 +458,19 @@ export default class Header extends React.Component {
                             ))}
                         </div>
                     </span>
-
                 </Pesquisa>
+
                 <Main />
+                <Novos>
+                    {this.state.listNewfilm.map((item) => (
+                        <>
+                            <p>{item.newFilm}
+                            </p>
+                            <p> {item.newDescription} </p>
+                        </>
+
+                    ))}
+                </Novos>
                 <Routes>
                     <Route path="/Todos" element={<Todos />} />
                 </Routes>

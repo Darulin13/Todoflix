@@ -58,7 +58,23 @@ const Box = styled.div`
     h2{
         font-size:15px;
         padding-top:1vh;
+    
     }
+    div{
+        width:100%;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+    }
+    span{
+        width:15%;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+    }
+    
 
 `
 const Card = styled.div`
@@ -85,7 +101,8 @@ const Card = styled.div`
 
 `
 const Icon = styled.img`
-    width:5%;`
+    width:5%;
+  `
 
 
 export default class Todos extends React.Component {
@@ -126,8 +143,9 @@ export default class Todos extends React.Component {
         ],
         listFilms: [],
         open: false,
-        favorito:false,
-        favoriteFilms:[],
+        favorito: false,
+        like: "-",
+        favoriteFilms: [],
     }
 
     OpenCard = () => {
@@ -138,13 +156,13 @@ export default class Todos extends React.Component {
         this.setState({
             favorito: !this.state.favorito
         })
-       // const Films = this.state.Films((item)=> item===id)
-      //  this.setState({
-//favoriteFilms:this.state.Films.concat(Films)
-     //   })
-       // console.log(this.state.favoriteFilms)
-      
-       
+        // const Films = this.state.Films((item)=> item===id)
+        //  this.setState({
+        //favoriteFilms:this.state.Films.concat(Films)
+        //   })
+        // console.log(this.state.favoriteFilms)
+
+
 
     }
 
@@ -177,10 +195,18 @@ export default class Todos extends React.Component {
                         {this.state.Films.map((item) => (
                             <Box >
                                 <Poster src={item.img} alt={item.title} onClick={this.OpenCard} >
-                              
+
                                 </Poster>
-                                <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={this.handleFavorite} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }}/>
-                                <h2>{item.title}</h2>
+                                <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={this.handleFavorite} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
+                                <div>
+                                    <h2>{item.title}</h2>
+                                    <span>
+                                        <p>-</p>
+                                        <img src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                                    </span>
+
+                                </div>
+
                                 <p>{item.paragraph}</p>
                             </Box>
                         ))}

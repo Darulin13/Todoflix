@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ReactStars from "react-rating-stars-component";
+
 
 const Container = styled.main`
     height:60vh;
@@ -19,8 +19,6 @@ const Text = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:top;
-
-
     
     p,h2{
        padding-top: 5px;
@@ -28,6 +26,7 @@ const Text = styled.div`
     }
     p{
         font-size:15px;
+    
     }
     h2{
         font-size:40px;
@@ -65,6 +64,7 @@ export default class Main extends React.Component {
         this.setState({
             favorito: !this.state.favorito
         })
+    
 
     }
     render() {
@@ -79,12 +79,7 @@ export default class Main extends React.Component {
                         <p>Visto recentemente</p>
                         <h2>Capitão Fantástico</h2>
                         <p>Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.</p>
-                        <ReactStars
-                            count={1}
-                            char={"ooo"}
-                            size={24}
-                            activeColor="#ffd700"
-                        />
+                        <img src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like"/>
                     </Text>
                 </Film>
 

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Todos from "./pages/Todos"
 import Main from "./Main"
 import ReactStars from "react-rating-stars-component";
+import Adicionados from "./pages/Adicionados"
 
 
 const Container = styled.header`
@@ -107,49 +108,57 @@ const Pesquisa = styled.section`
         display:flex;
         flex-direction:column;
         justify-content:center;
-        align-items:start;
+        align-items:end;
+        padding-right:10px;
         background-color:black;        
      }
     div{ 
-        width:30%;
-        background-color:white; 
+        width:23%;
+        background-color:black; 
         display:flex;
         align-items:start;
         flex-direction:column;
         position:absolute;
         z-index: 1;
-        overflow-y:scroll;  
+        overflow-y:scroll; 
+        max-height:60vh; 
+       
     }
     span{
-        width:36.4%; 
+        width:30.4%; 
         display:flex;
+       
         align-items:start;
         flex-direction:column;
     }
     p{
         background-color:black; 
         color:white;
-        width:100%;
-        padding-bottom:20px;
+        width:90%; 
+        padding-bottom:80px;
+   
 
     }
     h3{
         background-color:black; 
         color:white;
-        width:100%; 
         padding-bottom:10px;
+        width:90%; 
+ 
     }
     img{
-        width:100%; 
+        width:90%; 
         padding-bottom:10px;
+   
   
     }
 `
 const Form = styled.form`
-    border:solid red 2px;
+    border:solid white 1px;
+    border-radius:8px;
     position:absolute;
     z-index:1;
-    top:30vh;
+    top:10vh;
     width:60%;
     align-self:center;
     display:flex;
@@ -225,8 +234,31 @@ const Select = styled.select`
 
 `
 const Image = styled.div`
-    border:solid blue;
-    width:40%;
+   
+    width:38%;
+    display:flex;
+    flex-direction:column;
+    align-items:start;
+    justify-content:start;
+    img{
+        padding-bottom:10px;
+        width:100%
+    }
+    
+`
+const InputImagem = styled.input`
+    padding-top:10px;
+    padding-bottom:10px;
+`
+const TitleImage = styled.p`
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:start;
+    font-size:20px;
+    font-weight:600;
+    padding-bottom:10px;
 `
 const linkStyle = {
     textDecoration: "none",
@@ -327,16 +359,20 @@ export default class Header extends React.Component {
     }
     //Filtro de pesquisa
     Search = (event) => {
-        const { Films } = this.state;
-        const filterFilms = Films.filter((item) => {
-            if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
-                return true;
-            }
-        })
-        console.log(event.target.value);
-        this.setState({
-            listFilms: filterFilms
-        })
+        if (event.target.value !== 0) {
+            const { Films } = this.state;
+            const filterFilms = Films.filter((item) => {
+                if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                    return true;
+                }
+            })
+
+            this.setState({
+                listFilms: filterFilms,
+
+            })
+         
+        }
     }
     // Modal do botão de adicionar
     Modal = () => {
@@ -348,6 +384,7 @@ export default class Header extends React.Component {
     handleName = (event) => {
         this.setState({
             newFilm: event.target.value,
+
         })
     }
 
@@ -357,18 +394,21 @@ export default class Header extends React.Component {
 
         })
     }
-    handleChange
+
     // Criando lista dos filmes novos
     Add = (event) => {
+        event.preventDefault();
+
         this.setState({
             listNewfilm: this.state.listNewfilm.concat({
                 newFilm: this.state.newFilm,
                 newDescription: this.state.newDescription,
                 id: Date.now(),
                 open: false,
+
             })
         })
-        event.preventDefault();
+
 
     }
 
@@ -398,7 +438,7 @@ export default class Header extends React.Component {
                             <summary>
                                 <img src="https://media.graphassets.com/S6bPJf2RqqOQKkeawGgg" alt="login" /> </summary>
                             <div>
-dvsdvsdv
+
                             </div>
                         </Perfil>
 
@@ -434,6 +474,9 @@ dvsdvsdv
                                     />
                                 </Text>
                                 <Image>
+                                    <TitleImage>Imagem de capa</TitleImage>
+                                    <img src="https://media.graphassets.com/SoLP9lXoRm6EhJQnUU9C" alt="imagem" />
+                                    <InputImagem type="file" placeholder="Selecionar imagem" />
                                 </Image>
                             </article>
                             <Buttons>
@@ -473,6 +516,9 @@ dvsdvsdv
                 </Novos>
                 <Routes>
                     <Route path="/Todos" element={<Todos />} />
+                </Routes>
+                <Routes>
+                    <Route path="/Adicionados" element={<Adicionados />} />
                 </Routes>
             </Router>
 

@@ -1,10 +1,11 @@
 import React from "react";
-import styled, { ThemeConsumer } from "styled-components";
+import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Todos from "./pages/Todos"
-import Main from "./Main"
+import Destaques from "./pages/Destaques"
 import ReactStars from "react-rating-stars-component";
 import Adicionados from "./pages/Adicionados"
+import Todos from "./pages/Todos"
+
 
 
 const Container = styled.header`
@@ -356,6 +357,10 @@ export default class Header extends React.Component {
         newFilm: "",
         newDescription: "",
         listNewfilm: [],
+        destaques: true,
+        adicionados:false,
+        todos:false,
+        favoritos:false,
     }
     //Filtro de pesquisa
     Search = (event) => {
@@ -371,13 +376,28 @@ export default class Header extends React.Component {
                 listFilms: filterFilms,
 
             })
-         
+
         }
     }
     // Modal do botão de adicionar
     Modal = () => {
         this.setState({
             open: !this.state.open
+        })
+    }
+    // Modal rotas
+    Rota = () => {
+        this.setState({
+            destaques: !this.state.destaques,
+            todos:!this.state.todos,
+            adicionados:!this.state.adicionados,
+            favoritos:!this.state.favoritos,
+        })
+    }
+    Todos = () => {
+        this.setState({
+            todos:!this.state.todos,
+            destaques: !this.state.destaques
         })
     }
     // Recebendo valor do input
@@ -408,8 +428,6 @@ export default class Header extends React.Component {
 
             })
         })
-
-
     }
 
     render() {
@@ -422,32 +440,27 @@ export default class Header extends React.Component {
                         <details>
                             <summary>Categorias </summary>
                             <div>
-                                <Link to="/Todos" style={linkStyle}  ><p>Todos</p></Link>
-                                <Link to="/Favoritos" style={linkStyle}  >  <p>Favoritos</p></Link>
-                                <Link to="/Vistos" style={linkStyle}  ><p>Já vistos</p></Link>
-                                <Link to="/Adicionados" style={linkStyle}  > <p>Adicionados</p></Link>
+                                <Link to="/Todos" style={linkStyle} onClick={this.Rota} >  <p>Todos</p></Link>
+                                <Link to="/Favoritos" style={linkStyle} onClick={this.Rota} >  <p>Favoritos</p></Link>
+                                <Link to="/Vistos" style={linkStyle} onClick={this.Rota} ><p>Já vistos</p></Link>
+                                <Link to="/Adicionados" style={linkStyle} onClick={this.Rota}  > <p>Adicionados</p></Link>
                             </div>
                         </details>
                     </LeftBar>
                     <RightBar>
                         <Button onClick={this.Modal}> Adicionar filme
-
                         </Button>
                         <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
                         <Perfil>
                             <summary>
                                 <img src="https://media.graphassets.com/S6bPJf2RqqOQKkeawGgg" alt="login" /> </summary>
                             <div>
-
                             </div>
                         </Perfil>
-
                     </RightBar>
                 </Container>
-
                 {this.state.open && (
                     <Center>
-
                         <Form>
                             <Close>X</Close>
                             <h3>Adicionar Filme</h3>
@@ -487,7 +500,6 @@ export default class Header extends React.Component {
                         </Form>
                     </Center>
                 )}
-
                 <Pesquisa>
                     <span>
                         <div>
@@ -502,8 +514,28 @@ export default class Header extends React.Component {
                         </div>
                     </span>
                 </Pesquisa>
+                {this.state.destaques && (
+                    <Destaques />
+                )}
+                
+                {this.state.todos && (
+                      <Routes>
+                           <Route onClick={this.Todos} path="/Todos" element={<Todos />} /> 
+                      </Routes>
+                  
+                )}
+                    
+          
+                <Routes>
+                    <Route path="/Adicionados" element={<Adicionados />} />
+                </Routes>
+                
 
-                <Main />
+
+
+
+
+
                 <Novos>
                     {this.state.listNewfilm.map((item) => (
                         <>
@@ -514,13 +546,9 @@ export default class Header extends React.Component {
 
                     ))}
                 </Novos>
-                <Routes>
-                    <Route path="/Todos" element={<Todos />} />
-                </Routes>
-                <Routes>
-                    <Route path="/Adicionados" element={<Adicionados />} />
-                </Routes>
+
             </Router>
+
 
         )
     }

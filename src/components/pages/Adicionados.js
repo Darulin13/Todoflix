@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components";
-import Carousel from 'nuka-carousel';
+
 
 const Container = styled.main`
     color:white;
@@ -8,85 +8,23 @@ const Container = styled.main`
     flex-diretion:column;
     justify-content:center;
     align-items:center;
-    h1{
-        padding-left:5px;
-        font-size:20px;
-    }
-    nav{
-         width:97%; 
-    }
+
     
 `
-const carouselConfig = {
-    slidesToShow: 5,
-    autoplay: true,
-    wrapAround: true,
-    renderBottomCenterControls: false,
-    adaptiveHeight: true,
-    cellSpacing: "15",
-    style: {
-        width: "100%",
-
-        height: "100%"
-
-
-    }
 
 
 
 
 
-}
-const Poster = styled.img`
-    width:100%;
-    cursor:pointer;
-`
-const Box = styled.div`
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-evenly;
-    color:white;
-    padding-top:2vh;
-    padding-bottom:2vh;
-    p{
-        font-size:10px;
-        padding-top:1vh;
-    }
-    h2{
-        font-size:15px;
-        padding-top:1vh;
-    }
-
-`
-const Card = styled.div`
-    width:20%;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-evenly;
-    color:white;
-    padding:5vh;
-  
-
-    position:absolute;
-    z-index: 1;
-    bottom:100px;
-    border:solid white 2px;
-    p{
-        font-size:20px;
-        padding-top:1vh;
-    }
-    h2{
-        font-size:15px;
-        padding-top:1vh;
-    }
-
-`
-const Icon = styled.img`
-    width:5%;`
 
 
-export default class Todos extends React.Component {
+
+
+
+
+
+
+export default class Adicionados extends React.Component {
     state = {
         Films: [
             {
@@ -150,31 +88,7 @@ export default class Todos extends React.Component {
         return (
             <Container>
                 
-                <nav>
-                    <h1>Destaques</h1>
-                    <Carousel
-                        {...carouselConfig}
-                        defaultControlsConfig={{
-                            nextButtonText: ' >',
-                            prevButtonText: ' <',
-                            pagingDotsStyle: {
-                                fill: 'none',
-
-
-                            },
-                        }}>
-                        {this.state.Films.map((item) => (
-                            <Box >
-                                <Poster >
-                              
-                                </Poster>
-                                <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={this.handleFavorite} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }}/>
-                                <h2>cdsvsr</h2>
-                                <p></p>
-                            </Box>
-                        ))}
-                    </Carousel>
-                </nav>
+              teste
 
             </Container>
 

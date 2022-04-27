@@ -1,71 +1,49 @@
-import React from "react";
+import React from "react"
 import styled from "styled-components";
-import Carousel from 'nuka-carousel';
-
 
 
 const Container = styled.main`
+    width:83%;
     color:white;
     display:flex;
-    flex-diretion:column;
-    justify-content:center;
-    align-items:center;
-    h1{
-        padding-left:5px;
-        font-size:20px;
-    }
-    nav{
-         width:97%; 
-    }
-    
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:start;
+
+    padding-left:25px;
+    padding-top:25px; 
 `
-const carouselConfig = {
-    slidesToShow: 5,
-    autoplay: true,
-    wrapAround: true,
-    renderBottomCenterControls: false,
-    adaptiveHeight: true,
-    cellSpacing: "15",
-    style: {
-        width: "100%",
-
-        height: "100%"
-
-
-    }
-
-
-
-
-
-}
-const Poster = styled.img`
+const Title = styled.h1`
+    padding-bottom:5px;  
+    font-weight:400;
+`
+const Box = styled.section`
     width:100%;
-    cursor:pointer;
+    display:grid;
+    grid-template-columns: 1fr 1fr  1fr 1fr;
+    row-gap: 50px
+
 `
-const Box = styled.div`
+const Poster = styled.img`
+    width:95%;
+
+`
+const BoxChild = styled.div`
     width:100%;
     display:flex;
     flex-direction:column;
-    justify-content:space-evenly;
+    justify-content:center;
     color:white;
-    padding-top:2vh;
-    padding-bottom:2vh;
-    p{
-        font-size:10px;
-        padding-top:1vh;
-    }
-    h2{
-        font-size:15px;
-        padding-top:1vh;
-    
-    }
+
     div{
-        width:100%;
+        width:95%;
         display:flex;
         flex-direction:row;
         justify-content:space-between;
         align-items:center;
+
+  
+
     }
     span{
         width:15%;
@@ -73,38 +51,29 @@ const Box = styled.div`
         flex-direction:row;
         justify-content:space-between;
         align-items:center;
+     
     }
     
+`
+const Name = styled.h2`
+    font-size:15px;
+    width:80%;
+    padding-top:05px;
+    padding-bottom:05px;
+`
+const Paragraph = styled.p`
+    font-size:10px;
+    width:90%;
+    font-weight:500;
+
 
 `
-const Card = styled.div`
-    width:20%;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-evenly;
-    color:white;
-    padding:5vh;
-  
 
-    position:absolute;
-    z-index: 1;
-    bottom:100px;
-    border:solid white 2px;
-    p{
-        font-size:20px;
-        padding-top:1vh;
-    }
-    h2{
-        font-size:15px;
-        padding-top:1vh;
-    }
 
-`
 const Icon = styled.img`
-    width:5%;
-  `
-
-
+    
+    width:45%;
+`
 export default class Todos extends React.Component {
     state = {
         Films: [
@@ -144,74 +113,34 @@ export default class Todos extends React.Component {
         listFilms: [],
         open: false,
         favorito: false,
-        like: "-",
         favoriteFilms: [],
     }
 
-    OpenCard = () => {
-        this.setState({ open: !this.state.open })
-
-    }
-    handleFavorite = () => {
-        this.setState({
-            favorito: !this.state.favorito
-        })
-        // const Films = this.state.Films((item)=> item===id)
-        //  this.setState({
-        //favoriteFilms:this.state.Films.concat(Films)
-        //   })
-        // console.log(this.state.favoriteFilms)
-
-
-
-    }
 
     render() {
         return (
             <Container>
-                {this.state.open &&
 
-                    this.state.Films.map((item) => (
-                        <Card>
-                            <Poster src={item.img} alt={item.title} />
-                            <h2>{item.title}</h2>
-                            <p>{item.paragraph}</p>
+                <Title>Todos</Title>
+                <Box>{this.state.Films.map((item) => (
+                    <BoxChild>
+                   
+                        <Poster src={item.img} alt={item.title} />
+                        <div>
+                            <Name>{item.title}</Name>
+                            <span>
+                                <p>-</p>
+                                <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                            </span>
+                        </div>
+                        <Paragraph>{item.paragraph}</Paragraph>
+                    </BoxChild>
+                ))}
 
-                        </Card>
-                    ))}
-                <nav>
-                    <h1>Destaques</h1>
-                    <Carousel
-                        {...carouselConfig}
-                        defaultControlsConfig={{
-                            nextButtonText: ' >',
-                            prevButtonText: ' <',
-                            pagingDotsStyle: {
-                                fill: 'none',
+                </Box>
 
 
-                            },
-                        }}>
-                        {this.state.Films.map((item) => (
-                            <Box >
-                                <Poster src={item.img} alt={item.title} onClick={this.OpenCard} >
 
-                                </Poster>
-                                <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={this.handleFavorite} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
-                                <div>
-                                    <h2>{item.title}</h2>
-                                    <span>
-                                        <p>-</p>
-                                        <img src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
-                                    </span>
-
-                                </div>
-
-                                <p>{item.paragraph}</p>
-                            </Box>
-                        ))}
-                    </Carousel>
-                </nav>
 
             </Container>
 

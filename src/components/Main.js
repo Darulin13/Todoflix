@@ -20,18 +20,19 @@ const Text = styled.div`
     flex-direction:column;
     justify-content:top;
     
-    p,h2{
-       padding-top: 5px;
-        padding-bottom:5 px; 
-    }
+ 
     p{
         font-size:15px;
+        padding-top:10px; 
+        padding-bottom:10px; 
     
     }
     h2{
         font-size:40px;
+        padding-bottom:10px; 
     }
     img{
+   
         width:5%;
         cursor:pointer;
 

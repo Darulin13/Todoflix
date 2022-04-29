@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Destaques from "./pages/Destaques"
 import ReactStars from "react-rating-stars-component";
 import Adicionados from "./pages/Adicionados"
+import Favoritos from "./pages/Favoritos"
 import Todos from "./pages/Todos"
 
 
@@ -524,18 +525,14 @@ export default class Header extends React.Component {
                       </Routes>
                   
                 )}
-                    
-          
                 <Routes>
                     <Route path="/Adicionados" element={<Adicionados />} />
+
                 </Routes>
-                
-
-
-
-
-
-
+                <Routes>
+                    <Route path="/Favoritos" element={<Favoritos />} />
+                        
+                </Routes>
                 <Novos>
                     {this.state.listNewfilm.map((item) => (
                         <>

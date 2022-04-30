@@ -8,6 +8,7 @@ const Container = styled.main`
     flex-direction:column;
     justify-content:space-between;
     align-items:start;
+
     padding-left:25px;
     padding-top:25px; 
 `
@@ -19,10 +20,12 @@ const Box = styled.section`
     width:100%;
     display:grid;
     grid-template-columns: 1fr 1fr  1fr 1fr;
-    row-gap: 50px;
+    row-gap: 50px
+
 `
 const Poster = styled.img`
     width:95%;
+
 `
 const BoxChild = styled.div`
     width:100%;
@@ -30,12 +33,16 @@ const BoxChild = styled.div`
     flex-direction:column;
     justify-content:center;
     color:white;
+
     div{
         width:95%;
         display:flex;
         flex-direction:row;
         justify-content:space-between;
         align-items:center;
+
+  
+
     }
     span{
         width:15%;
@@ -43,7 +50,9 @@ const BoxChild = styled.div`
         flex-direction:row;
         justify-content:space-between;
         align-items:center;
-    } 
+     
+    }
+    
 `
 const Name = styled.h2`
     font-size:15px;
@@ -55,22 +64,32 @@ const Paragraph = styled.p`
     font-size:10px;
     width:90%;
     font-weight:500;
+
+
 `
-const Icon = styled.img`    
+
+
+const Icon = styled.img`
+    
     width:45%;
 `
 export default class Favoritos extends React.Component {
     state = {
-        listFilms: [],
+       favoriteList: [],
       
 
     }
 
-   // componentDidMount() {
-    //   this.setState({
-           // listFilms: localStorage.getItem(this.state.favoriteFilms)
-      //  })
-    //}
+    async componentDidMount() {
+        var List = localStorage.getItem("favoriteFilms")
+ 
+         const listFilm = JSON.parse(List)
+         this.setState({
+            favoriteList:this.state.favoriteList.concat(listFilm)
+         })
+           console.log("teste",this.state.favoriteList)
+  
+   }
 
 
 
@@ -78,28 +97,28 @@ export default class Favoritos extends React.Component {
         return (
             <Container>
 
-                <Title>Favoritos</Title>
-                <Box>
-             
-                        <BoxChild>
+            <Title>Favoritos</Title>
+            <Box>{this.state.favoriteList.map((item) => (
+                <BoxChild>
+               
+                    <Poster src={item.img} alt={item.title} />
+                    <div>
+                        <Name>{item.title}</Name>
+                        <span>
+                            <p>-</p>
+                            <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                        </span>
+                    </div>
+                    <Paragraph>{item.paragraph}</Paragraph>
+                </BoxChild>
+            ))}
 
-                            <Poster />
-                            <div>
-                                <Name>{}</Name>
-                                <span>
-                                    <p>-</p>
-                                    <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
-                                </span>
-                            </div>
-                            <Paragraph></Paragraph>
-                        </BoxChild>
-    
-
-
-                </Box>
+            </Box>
 
 
-            </Container>
+
+
+        </Container>
 
 
 

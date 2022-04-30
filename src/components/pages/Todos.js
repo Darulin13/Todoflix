@@ -122,20 +122,22 @@ export default class Todos extends React.Component {
             <Container>
 
                 <Title>Todos</Title>
-                <Box>{this.state.Films.map((item) => (
-                    <BoxChild>
+                <Box>
                    
-                        <Poster src={item.img} alt={item.title} />
-                        <div>
-                            <Name>{item.title}</Name>
-                            <span>
-                                <p>-</p>
-                                <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
-                            </span>
-                        </div>
-                        <Paragraph>{item.paragraph}</Paragraph>
-                    </BoxChild>
-                ))}
+                    {this.state.Films.map((item) => (
+                        <BoxChild>
+
+                            <Poster src={item.img} alt={item.title} />
+                            <div>
+                                <Name>{item.title}</Name>
+                                <span>
+                                    <p>-</p>
+                                    <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                                </span>
+                            </div>
+                            <Paragraph>{item.paragraph}</Paragraph>
+                        </BoxChild>
+                    ))}
 
                 </Box>
 

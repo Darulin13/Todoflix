@@ -102,8 +102,11 @@ const CardChild = styled.div`
 const Icon = styled.img`
     width:0.5%;
     position:absolute;
-    bottom:205px;
+    top:14px;
+    
     background-color:transparent;
+   
+
   `
 const Button = styled.button`
      width:65%;
@@ -136,6 +139,13 @@ const CloseButton = styled.button`
     
   `
 const Fav = styled.p`color:white;`
+
+const BoxChild = styled.div`
+
+    width:100%;
+   
+    `
+
 
 
 export default class Destaques extends React.Component {
@@ -204,8 +214,7 @@ export default class Destaques extends React.Component {
             favoriteFilms: this.state.favoriteFilms.concat(Films)
         })
         console.log("favoritos", this.state.favoriteFilms)
-         localStorage.setItem("favoriteFilms",this.state.favoriteFilms); 
-
+        localStorage.setItem("favoriteFilms", JSON.stringify(this.state.favoriteFilms));
         this.setState({
             favorito: !this.state.favorito
         })
@@ -252,8 +261,11 @@ export default class Destaques extends React.Component {
                             }}>
                             {this.state.Films.map((item) => (
                                 <Box >
-                                    <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={() => this.handleFavorite(item)} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
-                                    <Poster src={item.img} alt={item.title} onClick={() => this.OpenCard(item)} />
+                                    <BoxChild>
+                                        <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={() => this.handleFavorite(item)} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
+                                        <Poster src={item.img} alt={item.title} onClick={() => this.OpenCard(item)} />
+                                    </BoxChild>
+
                                     <div>
                                         <h2>{item.title}</h2>
                                         <span>
@@ -267,9 +279,9 @@ export default class Destaques extends React.Component {
                         </Carousel>
                     </nav>
                 </Container>
-                {this.state.favoriteFilms.map((item)=>(
+                {this.state.favoriteFilms.map((item) => (
                     <Fav>
-                    {item.title}</Fav>
+                        {item.title}</Fav>
                 ))}
             </>
         )

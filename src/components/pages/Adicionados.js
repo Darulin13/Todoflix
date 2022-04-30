@@ -13,8 +13,9 @@ const Container = styled.main`
     padding-top:25px; 
 `
 const Title = styled.h1`
-    padding-bottom:5px;  
+    padding-bottom:10px;  
     font-weight:400;
+    color:white;
 `
 const Box = styled.section`
     width:100%;
@@ -75,39 +76,42 @@ const Icon = styled.img`
 `
 export default class Adicionados extends React.Component {
     state = {
-            
-        listFilms: [],
+
         open: false,
-        favorito:false,
-        favoriteFilms:[],
+        favorito: false,
+        listNewfilms: [],
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        var newFilms = localStorage.getItem("listNewfilm")
+        const list = JSON.parse(newFilms)
         this.setState({
-            listFilms: localStorage.getItem("favoriteFilms")
+            listNewfilms: this.state.listNewfilms.concat(list)
         })
     }
-    
+
 
     render() {
         return (
             <Container>
-                
+
                 <Title>Adicionados Recentemente</Title>
-                <Box>
+                <Box>{this.state.listNewfilms.map((item) => (
+
+
                     <BoxChild>
-                   
-                        <Poster />
+
+                        <Poster src="https://media.graphassets.com/rHzKc7MuSFG3Keyg6IuC"/>
                         <div>
-                            <Name></Name>
+                            <Name>{item.newFilm}</Name>
                             <span>
                                 <p>-</p>
                                 <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
                             </span>
                         </div>
-                        <Paragraph></Paragraph>
+                        <Paragraph> {item.newDescription}</Paragraph>
                     </BoxChild>
-            
+                ))}
                 </Box>
 
 

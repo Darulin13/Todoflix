@@ -74,6 +74,13 @@ const Icon = styled.img`
     
     width:45%;
 `
+
+const Novos = styled.section`
+    color:white;
+    p{
+        color:white;
+    }
+`
 export default class Todos extends React.Component {
     state = {
         Films: [
@@ -110,11 +117,31 @@ export default class Todos extends React.Component {
 
 
         ],
+        Todos:[],
         listFilms: [],
         open: false,
         favorito: false,
         favoriteFilms: [],
+       listFilterFilms:[],
+       listNewFilms:[],
     }
+
+   // async componentDidMount() {
+    //    var filterFilms = localStorage.getItem("listFilterFilms")
+      //  const list =JSON.parse(filterFilms)
+       // this.setState({
+       //     listFilterFilms:listFilterFilms.concat()
+     //   })
+      // 
+//    }
+async componentDidMount() {
+    var newFilms = localStorage.getItem("listNewfilmToTodos")
+    const list = JSON.parse(newFilms)
+    this.setState({
+        listNewFilms:list,
+        Todos:this.state.Todos.concat([...this.state.Films, ...this.state.listNewFilms ])
+    })
+}
 
 
     render() {
@@ -123,8 +150,8 @@ export default class Todos extends React.Component {
 
                 <Title>Todos</Title>
                 <Box>
-                   
-                    {this.state.Films.map((item) => (
+             
+                    {this.state.Todos.map((item) => (
                         <BoxChild>
 
                             <Poster src={item.img} alt={item.title} />
@@ -141,6 +168,16 @@ export default class Todos extends React.Component {
 
                 </Box>
 
+                <Novos>
+                    {this.state.listNewFilms.map((item) => (
+                        <>
+                            <p>{item.title}
+                            </p>
+                            <p> {item.paragraph} </p>
+                        </>
+
+                    ))}
+                </Novos>
 
 
 

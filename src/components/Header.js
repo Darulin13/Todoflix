@@ -195,8 +195,11 @@ const Text = styled.div`
     display:flex;
     flex-direction:column;
     color:white;
-    <Destaques />ttom:10px;
-        padding-top:10px; 
+    width:45%;
+    label{
+        padding-bottom:10px;
+        padding-top:10px;
+    }
     }
    
     `
@@ -205,7 +208,7 @@ const Name = styled.input`
     color:white;
     border:none;
     width:100%;
-    padding-bottom:15px;
+    padding-bottom:20px;
     border-radius:5px;
 `
 const Description = styled.input`
@@ -213,7 +216,7 @@ const Description = styled.input`
     color:white;
     border:none;
     width:100%;
-    padding-bottom:30px;
+    padding-bottom:60px;
     border-radius:5px;
     `
 
@@ -240,8 +243,14 @@ const Image = styled.div`
     
 `
 const InputImagem = styled.input`
+    background-color:gray;
+    color:white;
+    border:none;
+    width:100%;
     padding-top:10px;
     padding-bottom:10px;
+    border-radius:5px;
+    font-size:25px;
 `
 const TitleImage = styled.p`
     width:100%;
@@ -346,9 +355,11 @@ export default class Header extends React.Component {
         ],
         listFilterFilms: [],
         open: false,
-        newFilm: "",
-        newDescription: "",
+        title: "",
+        paragraph: "",
+        img:"",
         listNewfilm: [],
+        
 
     }
     //Filtro de pesquisa
@@ -384,7 +395,7 @@ export default class Header extends React.Component {
     handleName = (event) => {
 
         this.setState({
-            newFilm: event.target.value,
+            title: event.target.value,
 
         })
 
@@ -393,10 +404,16 @@ export default class Header extends React.Component {
     handleDescription = (event) => {
 
         this.setState({
-            newDescription: event.target.value
+            paragraph: event.target.value
 
         })
 
+    }
+    handleUrl = (event) =>{
+        this.setState({
+            img: event.target.value
+
+        })
     }
 
     // Criando lista dos filmes novos
@@ -405,8 +422,9 @@ export default class Header extends React.Component {
 
         this.setState({
             listNewfilm: this.state.listNewfilm.concat({
-                newFilm: this.state.newFilm,
-                newDescription: this.state.newDescription,
+                title: this.state.title,
+                paragraph: this.state.paragraph,
+                img:this.state.img,
                 id: Date.now(),
             }),
             open: false,
@@ -476,7 +494,7 @@ export default class Header extends React.Component {
                                 <Image>
                                     <TitleImage>Imagem de capa</TitleImage>
                                     <img src="https://media.graphassets.com/SoLP9lXoRm6EhJQnUU9C" alt="imagem" />
-                                    <InputImagem type="file" placeholder="Selecionar imagem" />
+                                    <InputImagem type="text" placeholder="Selecionar URL" onChange={this.handleUrl} />
                                 </Image>
                             </article>
                             <Buttons>
@@ -503,16 +521,7 @@ export default class Header extends React.Component {
                 </Pesquisa>
 
 
-                <Novos>
-                    {this.state.listNewfilm.map((item) => (
-                        <>
-                            <p>{item.newFilm}
-                            </p>
-                            <p> {item.newDescription} </p>
-                        </>
-
-                    ))}
-                </Novos>
+              
 
 
 

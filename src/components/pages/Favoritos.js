@@ -75,21 +75,31 @@ const Icon = styled.img`
 `
 export default class Favoritos extends React.Component {
     state = {
-       favoriteList: [],
-      
-
+        favoriteList: [],
+        totalList: [],
     }
 
     async componentDidMount() {
+
         var List = localStorage.getItem("favoriteFilms")
- 
-         const listFilm = JSON.parse(List)
-         this.setState({
-            favoriteList:this.state.favoriteList.concat(listFilm)
-         })
-           console.log("teste",this.state.favoriteList)
-  
-   }
+        var fav = localStorage.getItem("filmFavorite");
+
+        const listFilm = JSON.parse(List)
+       const favFilm = JSON.parse(fav)
+     //  if (favFilm !== null) {
+           // this.setState({
+          //     favoriteList: this.state.favoriteList.concat(listFilm).concat(favFilm),
+//
+           // })
+      //  } else {
+     this.setState({
+  favoriteList: this.state.favoriteList.concat(listFilm)
+       })
+       //}
+        console.log("teste", this.state.favoriteList)
+
+
+    }
 
 
 
@@ -97,28 +107,28 @@ export default class Favoritos extends React.Component {
         return (
             <Container>
 
-            <Title>Favoritos</Title>
-            <Box>{this.state.favoriteList.map((item) => (
-                <BoxChild>
-               
-                    <Poster src={item.img} alt={item.title} />
-                    <div>
-                        <Name>{item.title}</Name>
-                        <span>
-                            <p>-</p>
-                            <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
-                        </span>
-                    </div>
-                    <Paragraph>{item.paragraph}</Paragraph>
-                </BoxChild>
-            ))}
+                <Title>Favoritos</Title>
+                <Box>{this.state.favoriteList.map((item) => (
+                    <BoxChild>
 
-            </Box>
+                        <Poster src={item.img} alt={item.title} />
+                        <div>
+                            <Name>{item.title}</Name>
+                            <span>
+                                <p>-</p>
+                                <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                            </span>
+                        </div>
+                        <Paragraph>{item.paragraph}</Paragraph>
+                    </BoxChild>
+                ))}
 
-
+                </Box>
 
 
-        </Container>
+
+
+            </Container>
 
 
 

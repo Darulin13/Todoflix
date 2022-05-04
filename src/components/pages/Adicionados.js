@@ -86,8 +86,9 @@ export default class Adicionados extends React.Component {
         var newFilms = localStorage.getItem("listNewfilm")
         const list = JSON.parse(newFilms)
         this.setState({
-            listNewfilms: this.state.listNewfilms.concat(list)
+            listNewfilms: list
         })
+        localStorage.setItem("listNewfilmToTodos", JSON.stringify(this.state.listNewfilms));
     }
 
 
@@ -101,15 +102,15 @@ export default class Adicionados extends React.Component {
 
                     <BoxChild>
 
-                        <Poster src="https://media.graphassets.com/rHzKc7MuSFG3Keyg6IuC"/>
+                        <Poster src={item.img} alt={item.title}/>
                         <div>
-                            <Name>{item.newFilm}</Name>
+                            <Name>{item.title}</Name>
                             <span>
                                 <p>-</p>
                                 <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
                             </span>
                         </div>
-                        <Paragraph> {item.newDescription}</Paragraph>
+                        <Paragraph> {item.paragraph}</Paragraph>
                     </BoxChild>
                 ))}
                 </Box>

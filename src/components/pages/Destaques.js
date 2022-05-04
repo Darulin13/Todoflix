@@ -104,6 +104,7 @@ const Icon = styled.img`
     position:absolute;
     top:14px;
     
+    
     background-color:transparent;
    
 
@@ -186,16 +187,21 @@ export default class Destaques extends React.Component {
         ],
         listFilms: [],
         favorito: false,
-        like: "-",
+        like: "",
         favoriteFilms: [],
+        fav:true,
+
     }
     //Abrindo card  
     OpenCard = (id) => {
+     
         const films = this.state.Films.filter((item) => item === id)
         this.setState({
+           
             listFilms: this.state.listFilms.concat(films),
+      
         })
-
+    
     }
     //Fechando card
     Close = (id) => {
@@ -205,21 +211,32 @@ export default class Destaques extends React.Component {
             })
         })
     }
+      //Nota
+    ratingChanged = () => {
+ 
+        
+    }
+   
 
 
     //Favorito
     handleFavorite = (id) => {
+        if(this.state.fav == true ){
         const Films = this.state.Films.filter((item) => item === id)
+        
         this.setState({
+           //   fav:!this.state.fav,
             favoriteFilms: this.state.favoriteFilms.concat(Films)
+          
         })
         console.log("favoritos", this.state.favoriteFilms)
         localStorage.setItem("favoriteFilms", JSON.stringify(this.state.favoriteFilms));
-        this.setState({
+       this.setState({
             favorito: !this.state.favorito
         })
-
     }
+    }
+
 
     render() {
         return (
@@ -245,6 +262,8 @@ export default class Destaques extends React.Component {
                                 color={"none"}
                                 activeColor={"#83BD75"}
                                 edit={true}
+                                onChange={this.ratingChanged}
+                             
                             />
                         </Card>
                     ))}
@@ -269,7 +288,7 @@ export default class Destaques extends React.Component {
                                     <div>
                                         <h2>{item.title}</h2>
                                         <span>
-                                            <p>-</p>
+                                            <p>{item.like}</p>
                                             <img src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
                                         </span>
                                     </div>

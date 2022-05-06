@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components";
 
 
+
 const Container = styled.main`
     width:83%;
     color:white;
@@ -12,8 +13,18 @@ const Container = styled.main`
 
     padding-left:25px;
     padding-top:25px; 
+
+    @media(max-width:1249px){
+        width:100%;
+      
+        
+    }
+    
+
+
 `
 const Title = styled.h1`
+    padding-top:25px;  
     padding-bottom:5px;  
     font-weight:400;
 `
@@ -21,12 +32,30 @@ const Box = styled.section`
     width:100%;
     display:grid;
     grid-template-columns: 1fr 1fr  1fr 1fr;
-    row-gap: 50px
+    row-gap: 50px;
+
+    @media(max-width:919px){
+         display:grid;
+        grid-template-columns: 1fr 1fr   1fr;
+    }
+    @media(max-width:698px){
+        display:grid;
+       grid-template-columns:  1fr   1fr;
+   }
+   
+   @media(max-width:428px){
+    display:grid;
+   grid-template-columns:    1fr;
+}
+
+    
 
 `
 const Poster = styled.img`
     width:95%;
 
+       
+    
 `
 const BoxChild = styled.div`
     width:100%;
@@ -81,6 +110,34 @@ const Novos = styled.section`
         color:white;
     }
 `
+const Input = styled.input`  
+    background-color:gray;
+    position:relative;
+    bottom:72px;
+    left:819px;
+    z-index:1;
+    color:white;
+    border:none;
+    width:37%;
+    padding-top:10px;
+    padding-bottom:10px;
+    ::-webkit-input-placeholder  { color:white; }
+
+    @media(max-width:924px){
+        position:relative;
+        
+        top:10px;
+   }
+
+    
+    @media(max-width:919px){
+        position:relative;
+        width:80%;
+        left:0px;
+        bottom:10px;
+       
+   }
+`
 export default class Todos extends React.Component {
     state = {
         Films: [
@@ -126,14 +183,6 @@ export default class Todos extends React.Component {
        listNewFilms:[],
     }
 
-   // async componentDidMount() {
-    //    var filterFilms = localStorage.getItem("listFilterFilms")
-      //  const list =JSON.parse(filterFilms)
-       // this.setState({
-       //     listFilterFilms:listFilterFilms.concat()
-     //   })
-      // 
-//    }
 async componentDidMount() {
     var newFilms = localStorage.getItem("listNewfilmToTodos")
     const list = JSON.parse(newFilms)
@@ -142,14 +191,30 @@ async componentDidMount() {
         Todos:this.state.Todos.concat([...this.state.Films, ...this.state.listNewFilms ])
     })
 }
+  Search = (event)  => {
+    if (event.target.value !== 0) {
+        const { Films } = this.state;
+        const filterFilms = Films.filter((item) => {
+            if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                return true;
+            }
+        })
+        this.setState({
+            Todos: filterFilms,
+
+        })
+    } 
+}
+
 
 
     render() {
         return (
             <Container>
-
+                <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
                 <Title>Todos</Title>
                 <Box>
+                  
              
                     {this.state.Todos.map((item) => (
                         <BoxChild>

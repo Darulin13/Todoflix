@@ -11,6 +11,15 @@ const Container = styled.header`
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
+    width:100%;
+    @media(max-width:856px){
+
+        height:20vh;
+        flex-direction:column;
+        justify-content:space-between;
+         
+     }
+   
 `
 
 const LeftBar = styled.section`
@@ -19,7 +28,11 @@ const LeftBar = styled.section`
     flex-direction:row;
     justify-content:space-evenly;
     align-items:center;
+
+    
+
     summary{
+        float: left;
         color:white;
         cursor:pointer;
     }
@@ -27,13 +40,14 @@ const LeftBar = styled.section`
         display:flex;
         flex-direction:column;
         justify-content:space-evenly;
+
        
     }
     
     div{
         color:white;
         position: absolute;
-        z-index: 1;
+        z-index: 2;
 
     }
     p{
@@ -45,12 +59,33 @@ const LeftBar = styled.section`
         cursor:pointer;
     }
 
+    @media(max-width:919px){
+        
+        width:60%;
+        align-self:start;
+        flex-direction:row-reverse;
+        justify-content:space-between;
+        summary{
+         
+            display:none
+        }
+
+        summary::-webkit-details-marker {
+        color: red;
+        }
+        @media(max-width: 425px){
+
+            width:65%;
+    }
 `
 const Title = styled.h1`
     color:white;
     font-size:15px;
     font-weight:600;
     cursor:pointer;
+    @media(max-width:919px){
+        display:none;
+    }
 
 
 `
@@ -62,14 +97,26 @@ const RightBar = styled.section`
     justify-content:space-evenly;
     height:60%;
 
+    @media(max-width:856px){
+        width:100%;
+        ;
+         height:50%;
+         flex-direction:row;
+        justify-content:space-between;
+         
+     }
+
 `
 const Input = styled.input`
     
-    background-color:gray;
+    background-color:#585858;
     color:white;
     border:none;
     width:60%;
     ::-webkit-input-placeholder  { color:white; }
+    @media(max-width:919px){
+       display:none;
+   }
 `
 const Button = styled.button`
     color:white;
@@ -78,16 +125,25 @@ const Button = styled.button`
     border-radius:4px;
     width:20%;
    cursor:pointer;
+
+   @media(max-width:856px){
+
+    width:20%;
+   
+     
+ }
 `
 const Perfil = styled.details`
     width:10%;
     cursor:pointer;
-   
     color:white;
     display:flex;
     flex-direction:row-reverse;
     justify-content:center;
    
+    @media(max-width:919px){
+        width:10%;
+    }
  
     img{
         width:50%;
@@ -96,67 +152,12 @@ const Perfil = styled.details`
 const Logo = styled.img`
 border:none;
 `
-const Pesquisa = styled.section`  
-    display:flex;
-    align-self:end;
-    flex-direction:row;
-    justify-content:end;
-    width:100%;
-    article{
-         width:100%;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:end;
-        padding-right:10px;
-        background-color:black;        
-     }
-    div{ 
-        width:23%;
-        background-color:black; 
-        display:flex;
-        align-items:start;
-        flex-direction:column;
-        position:absolute;
-        z-index: 1;
-        overflow-y:scroll; 
-        max-height:60vh; 
-       
-    }
-    span{
-        width:30.4%; 
-        display:flex;
-       
-        align-items:start;
-        flex-direction:column;
-    }
-    p{
-        background-color:black; 
-        color:white;
-        width:90%; 
-        padding-bottom:80px;
-   
 
-    }
-    h3{
-        background-color:black; 
-        color:white;
-        padding-bottom:10px;
-        width:90%; 
- 
-    }
-    img{
-        width:90%; 
-        padding-bottom:10px;
-   
-  
-    }
-`
 const Form = styled.form`
     border:solid white 1px;
     border-radius:8px;
     position:absolute;
-    z-index:1;
+    z-index:2;
     top:10vh;
     width:60%;
     align-self:center;
@@ -164,6 +165,7 @@ const Form = styled.form`
     flex-direction:column;
     justify-content:space-evenly;
     padding-top:20px;
+  
    
     article{
         display:flex;
@@ -171,17 +173,31 @@ const Form = styled.form`
         justify-content:space-evenly;
         padding-top:40px;
         padding-bottom:40px;
+
+        @media(max-width:665px){
+            flex-direction:column;
+          
+        }
     }
     h3{
 
         padding-left:55px;
         padding-top:20px;
-        font-size:25px;
-        <Destaques />
-    
-    
+        font-size:25px;  
 
-    
+        @media(max-width:665px){
+        align-self:center;
+        display:flex;
+        padding:0px;
+        text-align:center;
+          
+        }
+        
+
+       
+    }
+
+        
 `
 const Center = styled.section`
     display:flex;
@@ -196,23 +212,30 @@ const Text = styled.div`
     flex-direction:column;
     color:white;
     width:45%;
+    
     label{
         padding-bottom:10px;
         padding-top:10px;
     }
+    
+    @media(max-width:665px){
+        width:95%;
+        padding-left:10px;
     }
    
     `
 const Name = styled.input`
-    background-color:gray;
+    background-color:#585858;
     color:white;
     border:none;
     width:100%;
     padding-bottom:20px;
     border-radius:5px;
+
+    
 `
 const Description = styled.input`
-    background-color:gray;
+    background-color:#585858;
     color:white;
     border:none;
     width:100%;
@@ -220,15 +243,34 @@ const Description = styled.input`
     border-radius:5px;
     `
 
-const Select = styled.select`
-    background-color:gray;
+const Select = styled.label`
+    background-color:black;
     color:white;
     border:none;
     width:100%;
     padding-bottom:15px;
     border-radius:5px;
+`
+const Escolha = styled.div`
+    width:80%;
+
+    display:flex;
+    flex-direction:row;
+    align-items:start;
+    justify-content:space-between;
+    background-color:black;
+    option{
+        background-color:black;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:center;
+    }
+
 
 `
+
+
 const Image = styled.div`
    
     width:38%;
@@ -236,21 +278,24 @@ const Image = styled.div`
     flex-direction:column;
     align-items:start;
     justify-content:start;
-    img{
-        padding-bottom:10px;
-        width:100%
+    
+
+    @media(max-width:665px){
+        width:95%;
+        padding-left:10px;
     }
     
 `
 const InputImagem = styled.input`
-    background-color:gray;
-    color:white;
+    background-color:white;
+      ::-webkit-input-placeholder  { color:black; }
     border:none;
-    width:100%;
-    padding-top:10px;
-    padding-bottom:10px;
+    width:45%;
+    padding-top:5px;
+    padding-bottom:5px;
     border-radius:5px;
-    font-size:25px;
+    font-size:15px;
+    text-align:center;
 `
 const TitleImage = styled.p`
     width:100%;
@@ -261,6 +306,12 @@ const TitleImage = styled.p`
     font-size:20px;
     font-weight:600;
     padding-bottom:10px;
+`
+
+const Img = styled.img`
+    padding-bottom:10px;
+    width:100%
+    border:1px solid white;
 `
 const linkStyle = {
     textDecoration: "none",
@@ -288,6 +339,12 @@ const Buttons = styled.div`
     justify-content:center;
     padding-top:20px;
     padding-bottom:10px;
+
+    @media(max-width:574px){
+        width:95%;
+        justify-content:space-evenly;
+      
+    }
     
     `
 const Cancelar = styled.button`
@@ -310,6 +367,12 @@ const Confirmar = styled.button`
     padding-top:10px;
     padding-bottom:10px;
 
+    @media(max-width:574px){
+       width:35%;
+       
+      
+    }
+
 `
 const Novos = styled.section`
     color:white;
@@ -317,6 +380,7 @@ const Novos = styled.section`
         color:white;
     }
 `
+
 
 
 
@@ -357,28 +421,15 @@ export default class Header extends React.Component {
         open: false,
         title: "",
         paragraph: "",
-        img:"",
+        img: "",
         listNewfilm: [],
-        
+
 
     }
-    //Filtro de pesquisa
-    Search = (event) => {
-        if (event.target.value !== 0) {
-            const { Films } = this.state;
-            const filterFilms = Films.filter((item) => {
-                if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
-                    return true;
-                }
-            })
-            this.setState({
-                listFilterFilms: filterFilms,
-            })
-            localStorage.setItem("listFilterFilms", JSON.stringify(this.state.listFilterFilms));
 
 
-        }
-    }
+
+
     // Modal do botão de adicionar
     Modal = () => {
         this.setState({
@@ -409,7 +460,7 @@ export default class Header extends React.Component {
         })
 
     }
-    handleUrl = (event) =>{
+    handleUrl = (event) => {
         this.setState({
             img: event.target.value
 
@@ -424,7 +475,7 @@ export default class Header extends React.Component {
             listNewfilm: this.state.listNewfilm.concat({
                 title: this.state.title,
                 paragraph: this.state.paragraph,
-                img:this.state.img,
+                img: this.state.img,
                 id: Date.now(),
             }),
             open: false,
@@ -447,7 +498,7 @@ export default class Header extends React.Component {
                             <div>
                                 <Link to="/Todos" style={linkStyle} >  <p>Todos</p></Link>
                                 <Link to="/Favoritos" style={linkStyle}  >  <p>Favoritos</p></Link>
-                                <Link to="/Vistos" style={linkStyle}  ><p>Já vistos</p></Link>
+                                <Link to="/Visto" style={linkStyle}  ><p>Já vistos</p></Link>
                                 <Link to="/Adicionados" style={linkStyle}  > <p>Adicionados</p></Link>
                             </div>
                         </details>
@@ -455,7 +506,7 @@ export default class Header extends React.Component {
                     <RightBar>
                         <Button onClick={this.Modal}> Adicionar filme
                         </Button>
-                        <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
+                        <Input type="text" placeholder="   &#128269;   Pesquisar" />
                         <Perfil>
                             <summary>
                                 <img src="https://media.graphassets.com/S6bPJf2RqqOQKkeawGgg" alt="login" /> </summary>
@@ -477,10 +528,18 @@ export default class Header extends React.Component {
                                     <label>Descrição</label>
                                     <Description required type="text" onChange={this.handleDescription} />
                                     <label>Status</label>
-                                    <Select required >
-                                        <option>Já assiti</option>
-                                        <option>Ainda não assiti</option>
+                                    <Select type="submit" required >
+                                        <Escolha>
+                                            <img src="https://media.graphassets.com/dF8C1G2uRFWLrNId2JAF" />
+                                            <option>Já assiti</option>
+                                            <img src="https://media.graphassets.com/dF8C1G2uRFWLrNId2JAF" />
+                                            <option>Ainda não assiti</option>
+                                        </Escolha>
                                     </Select>
+
+
+
+
                                     <label>Nota</label>
                                     <ReactStars
                                         count={5}
@@ -493,7 +552,7 @@ export default class Header extends React.Component {
                                 </Text>
                                 <Image>
                                     <TitleImage>Imagem de capa</TitleImage>
-                                    <img src="https://media.graphassets.com/SoLP9lXoRm6EhJQnUU9C" alt="imagem" />
+                                    <Img src="https://media.graphassets.com/WxKtkt0DQjmMOUW08P6G" alt="imagem input" />
                                     <InputImagem type="text" placeholder="Selecionar URL" onChange={this.handleUrl} />
                                 </Image>
                             </article>
@@ -505,26 +564,6 @@ export default class Header extends React.Component {
                         </Form>
                     </Center>
                 )}
-                <Pesquisa>
-                    <span>
-                        <div>
-                            {this.state.listFilterFilms.map((item) => (
-                                <article>
-                                    <img src={item.img} alt={item.title} />
-                                    <h3>{item.title}</h3>
-                                    <p>{item.paragraph}</p>
-                                </article>
-
-                            ))}
-                        </div>
-                    </span>
-                </Pesquisa>
-
-
-              
-
-
-
             </>
         )
     }

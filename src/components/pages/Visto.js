@@ -1,17 +1,200 @@
 import React from "react"
 import styled from "styled-components";
+
 const Container = styled.main`
-  
+    width:83%;
     color:white;
-   
-`
-export default class Vistos extends React.Component {
-    render() {
-        return (<
-            Container
-        >
-oinsbvoirvb
-        </Container>)
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:start;
+
+    padding-left:25px;
+    padding-top:25px; 
+
+    @media(max-width:1249px){
+        width:100%;
+      
+        
     }
+
+`
+const Title = styled.h1`
+    padding-top:25px;  
+    padding-bottom:5px;  
+    font-weight:400;
+    color:white;
+`
+const Box = styled.section`
+    width:100%;
+    display:grid;
+    grid-template-columns: 1fr 1fr  1fr 1fr;
+    row-gap: 50px;
+
+    @media(max-width:919px){
+         display:grid;
+        grid-template-columns: 1fr 1fr   1fr;
+    }
+    @media(max-width:698px){
+        display:grid;
+       grid-template-columns:  1fr   1fr;
+   }
+   
+   @media(max-width:428px){
+    display:grid;
+   grid-template-columns:    1fr;
 }
 
+    
+
+`
+const Poster = styled.img`
+    width:95%;
+
+       
+    
+`
+const BoxChild = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    color:white;
+
+    div{
+        width:95%;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+
+  
+
+    }
+    span{
+        width:15%;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+     
+    }
+    
+`
+const Name = styled.h2`
+    font-size:15px;
+    width:80%;
+    padding-top:05px;
+    padding-bottom:05px;
+`
+const Paragraph = styled.p`
+    font-size:10px;
+    width:90%;
+    font-weight:500;
+
+
+`
+
+
+const Icon = styled.img`
+    
+    width:45%;
+`
+
+
+const Input = styled.input`  
+    background-color:#585858;
+    position:relative;
+    bottom:72px;
+    left:819px;
+    z-index:1;
+    color:white;
+    border:none;
+    width:37%;
+    padding-top:10px;
+    padding-bottom:10px;
+    ::-webkit-input-placeholder  { color:white; }
+
+    @media(max-width:924px){
+        position:relative;
+        
+        top:10px;
+   }
+
+    
+    @media(max-width:919px){
+        position:relative;
+        width:80%;
+        left:0px;
+        bottom:10px;
+       
+   }
+`
+export default class Visto extends React.Component {
+    state = {
+        assitidoList: [],
+        filterFilms:[],
+    }
+
+    async componentDidMount() {
+
+        var List = localStorage.getItem("asssitidosList")
+        const listFilm = JSON.parse(List)
+        this.setState({
+            assitidoList: this.state.assitidoList.concat(listFilm)
+        })
+
+        console.log("assistidos", this.state.assitidoList)
+
+
+    }
+
+    Search = (event) => {
+        if (event.target.value !== 0) {
+            const { assitidoList } = this.state;
+            const filterFilms = assitidoList.filter((item) => {
+                if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                    return true;
+                }
+            })
+            this.setState({
+                assitidoList: filterFilms,
+
+            })
+        }
+    }
+
+
+
+    render() {
+        return (
+            <Container>
+                <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
+                <Title>Já visto</Title>
+                <Box>{this.state.assitidoList.map((item) => (
+                    <BoxChild>
+
+                        <Poster src={item.img} alt={item.title} />
+                        <div>
+                            <Name>{item.title}</Name>
+                            <span>
+                                <p>-</p>
+                                <Icon src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                            </span>
+                        </div>
+                        <Paragraph>{item.paragraph}</Paragraph>
+                    </BoxChild>
+                ))}
+
+                </Box>
+
+
+
+
+            </Container>
+
+
+
+        )
+    }
+}

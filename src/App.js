@@ -26,7 +26,7 @@ export default function App() {
         <Route path="/Todos" element={<Todos />} />
         <Route path="/Adicionados" element={<Adicionados />} />
         <Route path="/Favoritos" element={<Favoritos />} />
-        <Route path="/Visto" element={<Visto />} />
+        <Route path="/Visto" element={<Visto/>} />
       </Routes>
 
 

@@ -11,8 +11,18 @@ const Container = styled.main`
 
     padding-left:25px;
     padding-top:25px; 
+
+    @media(max-width:1249px){
+        width:100%;
+      
+        
+    }
+    
+
+
 `
 const Title = styled.h1`
+    padding-top:25px;  
     padding-bottom:5px;  
     font-weight:400;
 `
@@ -20,12 +30,30 @@ const Box = styled.section`
     width:100%;
     display:grid;
     grid-template-columns: 1fr 1fr  1fr 1fr;
-    row-gap: 50px
+    row-gap: 50px;
+
+    @media(max-width:919px){
+         display:grid;
+        grid-template-columns: 1fr 1fr   1fr;
+    }
+    @media(max-width:698px){
+        display:grid;
+       grid-template-columns:  1fr   1fr;
+   }
+   
+   @media(max-width:428px){
+    display:grid;
+   grid-template-columns:    1fr;
+}
+
+    
 
 `
 const Poster = styled.img`
     width:95%;
 
+       
+    
 `
 const BoxChild = styled.div`
     width:100%;
@@ -73,10 +101,41 @@ const Icon = styled.img`
     
     width:45%;
 `
+
+
+const Input = styled.input`  
+    background-color:#585858;
+    position:relative;
+    bottom:72px;
+    left:819px;
+    z-index:1;
+    color:white;
+    border:none;
+    width:37%;
+    padding-top:10px;
+    padding-bottom:10px;
+    ::-webkit-input-placeholder  { color:white; }
+
+    @media(max-width:924px){
+        position:relative;
+        
+        top:10px;
+   }
+
+    
+    @media(max-width:919px){
+        position:relative;
+        width:80%;
+        left:0px;
+        bottom:10px;
+       
+   }
+`
 export default class Favoritos extends React.Component {
     state = {
         favoriteList: [],
         totalList: [],
+        filterFilms:[],
     }
 
     async componentDidMount() {
@@ -101,12 +160,27 @@ export default class Favoritos extends React.Component {
 
     }
 
+    Search = (event)  => {
+        if (event.target.value !== 0) {
+            const { favoriteList } = this.state;
+            const filterFilms = favoriteList.filter((item) => {
+                if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                    return true;
+                }
+            })
+            this.setState({
+                favoriteList: filterFilms,
+    
+            })
+        } 
+    }
+
 
 
     render() {
         return (
             <Container>
-
+                 <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
                 <Title>Favoritos</Title>
                 <Box>{this.state.favoriteList.map((item) => (
                     <BoxChild>

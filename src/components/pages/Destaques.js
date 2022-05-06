@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Carousel from 'nuka-carousel'
-import Main from "../Main"
+
 import ReactStars from "react-rating-stars-component";
 
 const Container = styled.main`
@@ -17,6 +17,8 @@ const Container = styled.main`
     nav{
          width:97%; 
     }
+
+    
 `
 const carouselConfig = {
     slidesToShow: 5,
@@ -28,11 +30,15 @@ const carouselConfig = {
     style: {
         width: "100%",
         height: "100%"
-    }
+
+    },
+
+
 }
 const Poster = styled.img`
     width:100%;
     cursor:pointer;
+  
 `
 const Box = styled.div`
     width:100%;
@@ -42,6 +48,7 @@ const Box = styled.div`
     color:white;
     padding-top:2vh;
     padding-bottom:2vh;
+    
     p{
         font-size:10px;
         padding-top:1vh;
@@ -64,6 +71,7 @@ const Box = styled.div`
         flex-direction:row;
         justify-content:space-between;
         align-items:center;
+        
     }
 `
 const Card = styled.div`
@@ -75,9 +83,10 @@ const Card = styled.div`
     padding:5vh;
     position:absolute;
     z-index: 1;
-    bottom:5px;
+    top:35px;
     border:solid white 1px;
     border-radius:8px;
+    border:solid white;
     p{
         font-size:20px;
         padding-top:1vh;   
@@ -97,14 +106,15 @@ const CardChild = styled.div`
     justify-content:space-between;
     width:40%;
     padding-top:14px;
-    align-items:center;`
+    align-items:center;
+    `
 
 const Icon = styled.img`
-    width:0.5%;
-    position:absolute;
-    top:14px;
-    
-    
+    width:8%;
+    position:relative;
+    top:28px;
+    left:220px;
+    z-index:1;
     background-color:transparent;
    
 
@@ -114,7 +124,7 @@ const Button = styled.button`
      padding-top:1px;
      padding-bottom:1px;
      border:none;
-     background-color:gray;
+     background-color:#585858;
      color:white;
      border-radius:4px;
      font-size:17px;
@@ -125,6 +135,7 @@ const IconHeart = styled.img`
     width:12%;
     cursor:pointer;
     background-color:transparent;
+ 
     
   `
 const CloseButton = styled.button`
@@ -141,11 +152,100 @@ const CloseButton = styled.button`
   `
 const Fav = styled.p`color:white;`
 
-const BoxChild = styled.div`
-
+const BoxChild = styled.section`
     width:100%;
+  `
+
+const ContainerMain = styled.main`
+  height:60vh;
+  width:70%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-around;
+  align-items:center;
+ 
+
+  @media(max-width:1178px){
+    height:90vw;
+      display:flex;
+      width:100%;
+      flex-direction:column-reverse;
+      flex-wrap:wrap;
+       
+  };
+  @media(max-width:604px){
+      height:60vh;
+      display:flex;
+      width:100%;
+      flex-direction:column-reverse;
+       flex-wrap:wrap;
+  };
+ 
+
+
+`
+const Text = styled.div`
+  color:white;
+  width:45%;
+  display:flex;
+  flex-direction:column;
+  justify-content:top;
+  
+  p{
+      font-size:15px;
+      padding-top:10px; 
+      padding-bottom:10px; 
+  
+  }
+  h2{
+      font-size:40px;
+      padding-bottom:10px; 
+  }
+  img{
+ 
+      width:5%;
+      cursor:pointer;
+     
+  }
+
+  @media(max-width:1178px){
+     width:80%;
+      align-self:center;
+      padding-top:10px;
+     
+  };
+`
+const Film = styled.article`
+  width:95%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+
+  @media(max-width:1178px){
+    width:100%;
+    flex-direction:column;
+    
    
-    `
+};
+  
+`
+const Banner = styled.section`
+  width:50%;
+
+  img{
+      width:100%;
+
+      
+  }
+
+  @media(max-width:1178px){
+    width:80%;
+    flex-direction:column;
+    align-self:center;
+   
+};
+
+`
 
 
 
@@ -182,26 +282,34 @@ export default class Destaques extends React.Component {
                 img: "https://media.graphassets.com/ugXGyzFUSgFmWJ6LJl2H",
                 id: 4,
             },
+            {
 
+                title: "Capitão Fantástico",
+                paragraph: "Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.",
+                img: "https://media.graphassets.com/CEHvNDY1SBKkmEbYpTOl",
+                id: 5,
+            },
 
         ],
         listFilms: [],
         favorito: false,
         like: "",
         favoriteFilms: [],
-        fav:true,
+       
+        assistido: false,
+        asssitidosFilms:[],
 
     }
     //Abrindo card  
     OpenCard = (id) => {
-     
+
         const films = this.state.Films.filter((item) => item === id)
         this.setState({
-           
+
             listFilms: this.state.listFilms.concat(films),
-      
+
         })
-    
+
     }
     //Fechando card
     Close = (id) => {
@@ -211,46 +319,71 @@ export default class Destaques extends React.Component {
             })
         })
     }
-      //Nota
+    //Nota
     ratingChanged = () => {
- 
-        
+
+
     }
-   
+
 
 
     //Favorito
     handleFavorite = (id) => {
-        if(this.state.fav == true ){
-        const Films = this.state.Films.filter((item) => item === id)
+            const Films = this.state.Films.filter((item) => item === id)
+
+            this.setState({
+
+                favoriteFilms: this.state.favoriteFilms.concat(Films)
+
+            })
+            console.log("favoritos", this.state.favoriteFilms)
+            localStorage.setItem("favoriteFilms", JSON.stringify(this.state.favoriteFilms));
+            this.setState({
+                favorito: !this.state.favorito
+            })
         
-        this.setState({
-           //   fav:!this.state.fav,
-            favoriteFilms: this.state.favoriteFilms.concat(Films)
-          
-        })
-        console.log("favoritos", this.state.favoriteFilms)
-        localStorage.setItem("favoriteFilms", JSON.stringify(this.state.favoriteFilms));
-       this.setState({
-            favorito: !this.state.favorito
-        })
     }
-    }
+  //Assistidos
+  handleAssistidos = (id) => {
+    const Films = this.state.Films.filter((item) => item === id)
+    this.setState({
+        asssitidosFilms: this.state.asssitidosFilms.concat(Films)
+    })
+    localStorage.setItem("asssitidosList", JSON.stringify(this.state.asssitidosFilms));
+    this.setState({
+        assistido: !this.state.assistido
+    })
+  }
 
 
     render() {
         return (
             <>
+                <ContainerMain>
+                    <Film>
+                        <Banner>
+                            <img src={this.state.Films[5].img} alt="Capitão" />
+                        </Banner>
+                        <Text>
+                            <img src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={() => this.handleFavorite()} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
+                            <p>Visto recentemente</p>
+                            <h2>{this.state.Films[5].title}</h2>
 
-                <Main />
+                            <p>{this.state.Films[5].paragraph} </p>
+                            <img src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                        </Text>
+
+                    </Film>
+                </ContainerMain>
+
                 <Container>
                     {this.state.listFilms.map((item) => (
                         <Card>
                             <CloseButton onClick={() => { this.Close(item.id) }}>X</CloseButton>
                             <Poster src={item.img} alt={item.title} />
                             <CardChild>
-                                <Button>Já Assisti</Button>
-                                <IconHeart src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={this.handleFavorite} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
+                                <Button onClick={() => this.handleAssistidos(item)} style={this.state.assistido === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }}>Já Assisti</Button>
+                                <IconHeart src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={() => this.handleFavorite(item)} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
                                 <IconHeart src="https://media.graphassets.com/Ol4EIyBqSuLXDlcQikyQ" alt="More innformation" />
                             </CardChild>
                             <h2>{item.title}</h2>
@@ -263,7 +396,7 @@ export default class Destaques extends React.Component {
                                 activeColor={"#83BD75"}
                                 edit={true}
                                 onChange={this.ratingChanged}
-                             
+
                             />
                         </Card>
                     ))}
@@ -298,10 +431,7 @@ export default class Destaques extends React.Component {
                         </Carousel>
                     </nav>
                 </Container>
-                {this.state.favoriteFilms.map((item) => (
-                    <Fav>
-                        {item.title}</Fav>
-                ))}
+                
             </>
         )
     }

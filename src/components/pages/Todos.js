@@ -113,12 +113,12 @@ const Novos = styled.section`
 const Input = styled.input`  
     background-color:gray;
     position:relative;
-    bottom:72px;
-    left:819px;
+        
+    top:10px;
     z-index:1;
     color:white;
     border:none;
-    width:37%;
+    width:99%;
     padding-top:10px;
     padding-bottom:10px;
     ::-webkit-input-placeholder  { color:white; }
@@ -174,37 +174,40 @@ export default class Todos extends React.Component {
 
 
         ],
-        Todos:[],
+        Todos: [],
         listFilms: [],
         open: false,
         favorito: false,
         favoriteFilms: [],
-       listFilterFilms:[],
-       listNewFilms:[],
+        listFilterFilms: [],
+        listNewFilms: [],
     }
 
-async componentDidMount() {
-    var newFilms = localStorage.getItem("listNewfilmToTodos")
-    const list = JSON.parse(newFilms)
-    this.setState({
-        listNewFilms:list,
-        Todos:this.state.Todos.concat([...this.state.Films, ...this.state.listNewFilms ])
-    })
-}
-  Search = (event)  => {
-    if (event.target.value !== 0) {
-        const { Films } = this.state;
-        const filterFilms = Films.filter((item) => {
-            if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
-                return true;
-            }
-        })
+    async componentDidMount() {
+        var newFilms = localStorage.getItem("listNewfilmToTodos")
+        const list = JSON.parse(newFilms)
         this.setState({
-            Todos: filterFilms,
-
+            listNewFilms: list,
+            Todos: this.state.Todos.concat([...this.state.Films, ...this.state.listNewFilms])
         })
-    } 
-}
+    }
+
+    //Array.prototype.filter() expects a value to be returned at the end of arrow function 
+
+    /* Search = (event)  => {
+       if (event.target.value !== 0) {
+           const { Films } = this.state;
+           const filterFilms = Films.filter((item) => {
+               if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                   return true;
+               }
+           })
+           this.setState({
+               Todos: filterFilms,
+   
+           })
+       } 
+   }*/
 
 
 
@@ -214,8 +217,8 @@ async componentDidMount() {
                 <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
                 <Title>Todos</Title>
                 <Box>
-                  
-             
+
+
                     {this.state.Todos.map((item) => (
                         <BoxChild>
 

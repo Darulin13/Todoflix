@@ -104,14 +104,14 @@ const Icon = styled.img`
 
 
 const Input = styled.input`  
-    background-color:#585858;
+    background-color:gray;
     position:relative;
-    bottom:72px;
-    left:819px;
+        
+    top:10px;
     z-index:1;
     color:white;
     border:none;
-    width:37%;
+    width:99%;
     padding-top:10px;
     padding-bottom:10px;
     ::-webkit-input-placeholder  { color:white; }
@@ -135,7 +135,7 @@ export default class Favoritos extends React.Component {
     state = {
         favoriteList: [],
         totalList: [],
-        filterFilms:[],
+        filterFilms: [],
     }
 
     async componentDidMount() {
@@ -144,43 +144,43 @@ export default class Favoritos extends React.Component {
         var fav = localStorage.getItem("filmFavorite");
 
         const listFilm = JSON.parse(List)
-       const favFilm = JSON.parse(fav)
-     //  if (favFilm !== null) {
-           // this.setState({
-          //     favoriteList: this.state.favoriteList.concat(listFilm).concat(favFilm),
-//
-           // })
-      //  } else {
-     this.setState({
-  favoriteList: this.state.favoriteList.concat(listFilm)
-       })
-       //}
+        //  const favFilm = JSON.parse(fav)
+        //  if (favFilm !== null) {
+        // this.setState({
+        //     favoriteList: this.state.favoriteList.concat(listFilm).concat(favFilm),
+        //
+        // })
+        //  } else {
+        this.setState({
+            favoriteList: this.state.favoriteList.concat(listFilm)
+        })
+        //}
         console.log("teste", this.state.favoriteList)
 
 
     }
-
-    Search = (event)  => {
-        if (event.target.value !== 0) {
-            const { favoriteList } = this.state;
-            const filterFilms = favoriteList.filter((item) => {
-                if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
-                    return true;
-                }
-            })
-            this.setState({
-                favoriteList: filterFilms,
-    
-            })
-        } 
-    }
+    //Array.prototype.filter() expects a value to be returned at the end of arrow function 
+    /*  Search = (event)  => {
+          if (event.target.value !== 0) {
+              const { favoriteList } = this.state;
+              const filterFilms = favoriteList.filter((item) => {
+                  if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                      return true;
+                  }
+              })
+              this.setState({
+                  favoriteList: filterFilms,
+      
+              })
+          } 
+      }*/
 
 
 
     render() {
         return (
             <Container>
-                 <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
+                <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
                 <Title>Favoritos</Title>
                 <Box>{this.state.favoriteList.map((item) => (
                     <BoxChild>

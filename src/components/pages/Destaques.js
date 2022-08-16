@@ -17,6 +17,10 @@ const Container = styled.main`
     nav{
          width:97%; 
     }
+    @media(max-width:768px){
+        display:none;
+     }
+    
 
     
 `
@@ -38,6 +42,7 @@ const carouselConfig = {
 const Poster = styled.img`
     width:100%;
     cursor:pointer;
+    
   
 `
 const Box = styled.div`
@@ -48,6 +53,8 @@ const Box = styled.div`
     color:white;
     padding-top:2vh;
     padding-bottom:2vh;
+    
+
     
     p{
         font-size:10px;
@@ -87,6 +94,8 @@ const Card = styled.div`
     border:solid white 1px;
     border-radius:8px;
     border:solid white;
+
+   
     p{
         font-size:20px;
         padding-top:1vh;   
@@ -150,7 +159,7 @@ const CloseButton = styled.button`
     padding:0;
     
   `
-const Fav = styled.p`color:white;`
+
 
 const BoxChild = styled.section`
     width:100%;
@@ -163,6 +172,7 @@ const ContainerMain = styled.main`
   flex-direction:row;
   justify-content:space-around;
   align-items:center;
+  
  
 
   @media(max-width:1178px){
@@ -246,6 +256,28 @@ const Banner = styled.section`
 };
 
 `
+const ResponsiveContainer = styled.main`
+    display:none;
+    @media(max-width:768px){
+        display:flex;
+     }
+    
+`
+const carouselResponsiveConfig = {
+    slidesToShow: 1,
+    autoplay: true,
+    wrapAround: true,
+    renderBottomCenterControls: false,
+    adaptiveHeight: true,
+    cellSpacing: "15",
+    style: {
+        width: "100%",
+        height: "100%"
+
+    },
+
+
+}
 
 
 
@@ -295,9 +327,9 @@ export default class Destaques extends React.Component {
         favorito: false,
         like: "",
         favoriteFilms: [],
-       
+
         assistido: false,
-        asssitidosFilms:[],
+        asssitidosFilms: [],
 
     }
     //Abrindo card  
@@ -329,31 +361,31 @@ export default class Destaques extends React.Component {
 
     //Favorito
     handleFavorite = (id) => {
-            const Films = this.state.Films.filter((item) => item === id)
+        const Films = this.state.Films.filter((item) => item === id)
 
-            this.setState({
+        this.setState({
 
-                favoriteFilms: this.state.favoriteFilms.concat(Films)
+            favoriteFilms: this.state.favoriteFilms.concat(Films)
 
-            })
-            console.log("favoritos", this.state.favoriteFilms)
-            localStorage.setItem("favoriteFilms", JSON.stringify(this.state.favoriteFilms));
-            this.setState({
-                favorito: !this.state.favorito
-            })
-        
+        })
+        console.log("favoritos", this.state.favoriteFilms)
+        localStorage.setItem("favoriteFilms", JSON.stringify(this.state.favoriteFilms));
+        this.setState({
+            favorito: !this.state.favorito
+        })
+
     }
-  //Assistidos
-  handleAssistidos = (id) => {
-    const Films = this.state.Films.filter((item) => item === id)
-    this.setState({
-        asssitidosFilms: this.state.asssitidosFilms.concat(Films)
-    })
-    localStorage.setItem("asssitidosList", JSON.stringify(this.state.asssitidosFilms));
-    this.setState({
-        assistido: !this.state.assistido
-    })
-  }
+    //Assistidos
+    handleAssistidos = (id) => {
+        const Films = this.state.Films.filter((item) => item === id)
+        this.setState({
+            asssitidosFilms: this.state.asssitidosFilms.concat(Films)
+        })
+        localStorage.setItem("asssitidosList", JSON.stringify(this.state.asssitidosFilms));
+        this.setState({
+            assistido: !this.state.assistido
+        })
+    }
 
 
     render() {
@@ -431,7 +463,37 @@ export default class Destaques extends React.Component {
                         </Carousel>
                     </nav>
                 </Container>
-                
+                <ResponsiveContainer>
+                <Carousel
+                            {...carouselResponsiveConfig}
+                            defaultControlsConfig={{
+                                nextButtonText: ' >',
+                                prevButtonText: ' <',
+                                pagingDotsStyle: {
+                                    fill: 'none',
+                                },
+                            }}>
+                            {this.state.Films.map((item) => (
+                                <Box >
+                                    <BoxChild>
+                                        <Icon src="https://media.graphassets.com/HC8tbc7QSoetdCCmR9qC" alt="heart" onClick={() => this.handleFavorite(item)} style={this.state.favorito === true ? { filter: "brightness(1.5)" } : { filter: "brightness(0.5)" }} />
+                                        <Poster src={item.img} alt={item.title} onClick={() => this.OpenCard(item)} />
+                                    </BoxChild>
+
+                                    <div>
+                                        <h2>{item.title}</h2>
+                                        <span>
+                                            <p>{item.like}</p>
+                                            <img src="https://media.graphassets.com/Vs3a1OBlRSC4P6R5xnjK" alt="like" />
+                                        </span>
+                                    </div>
+                                    <p>{item.paragraph}</p>
+                                </Box>
+                            ))}
+                        </Carousel>
+
+                </ResponsiveContainer>
+
             </>
         )
     }

@@ -104,14 +104,13 @@ const Icon = styled.img`
 
 
 const Input = styled.input`  
-    background-color:#585858;
+    background-color:gray;
     position:relative;
-    bottom:72px;
-    left:819px;
+    top:10px;
     z-index:1;
     color:white;
     border:none;
-    width:37%;
+    width:99%;
     padding-top:10px;
     padding-bottom:10px;
     ::-webkit-input-placeholder  { color:white; }
@@ -137,11 +136,11 @@ export default class Adicionados extends React.Component {
         open: false,
         favorito: false,
         listNewfilms: [],
-        filterFilms:[],
-        
+        filterFilms: [],
+
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         var newFilms = localStorage.getItem("listNewfilm")
         const list = JSON.parse(newFilms)
         this.setState({
@@ -149,7 +148,8 @@ export default class Adicionados extends React.Component {
         })
         localStorage.setItem("listNewfilmToTodos", JSON.stringify(this.state.listNewfilms));
     }
-
+    //Array.prototype.filter() expects a value to be returned at the end of arrow function 
+    /*
     Search = (event)  => {
         if (event.target.value !== 0) {
             const { listNewfilms } = this.state;
@@ -164,20 +164,20 @@ export default class Adicionados extends React.Component {
             })
         } 
     }
-    
+    */
 
 
     render() {
         return (
             <Container>
-                 <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
+                <Input type="text" placeholder="   &#128269;   Pesquisar" onChange={this.Search} />
                 <Title>Adicionados Recentemente</Title>
                 <Box>{this.state.listNewfilms.map((item) => (
 
 
                     <BoxChild>
 
-                        <Poster src={item.img} alt={item.title}/>
+                        <Poster src={item.img} alt={item.title} />
                         <div>
                             <Name>{item.title}</Name>
                             <span>

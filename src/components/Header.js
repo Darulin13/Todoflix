@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-
-
 const Container = styled.header`
     height:10vh;
     display:flex;
@@ -12,11 +10,13 @@ const Container = styled.header`
     justify-content:space-between;
     align-items:center;
     width:100%;
+   
     @media(max-width:856px){
 
-        height:20vh;
+        height:30vh;
         flex-direction:column;
-        justify-content:space-between;
+        justify-content:space-between; 
+        
          
      }
    
@@ -265,6 +265,15 @@ const Escolha = styled.div`
         flex-direction:row;
         align-items:center;
         justify-content:center;
+        @media(max-width:850px){
+            flex-direction:column;
+            padding-bottom:10px;
+            padding-top:10px;
+        }
+    }
+    @media(max-width:850px){
+        flex-direction:column;
+      
     }
 
 
@@ -283,6 +292,12 @@ const Image = styled.div`
     @media(max-width:665px){
         width:95%;
         padding-left:10px;
+    }
+    img{
+        @media(max-width:665px){
+            width:98%;
+      
+        }
     }
     
 `
@@ -306,6 +321,11 @@ const TitleImage = styled.p`
     font-size:20px;
     font-weight:600;
     padding-bottom:10px;
+    @media(max-width:665px){
+        padding-bottom:30px;
+  
+    }
+    
 `
 
 const Img = styled.img`
@@ -374,12 +394,7 @@ const Confirmar = styled.button`
     }
 
 `
-const Novos = styled.section`
-    color:white;
-    p{
-        color:white;
-    }
-`
+
 
 
 
@@ -530,9 +545,9 @@ export default class Header extends React.Component {
                                     <label>Status</label>
                                     <Select type="submit" required >
                                         <Escolha>
-                                            <img src="https://media.graphassets.com/dF8C1G2uRFWLrNId2JAF" />
+                                            <img src="https://media.graphassets.com/dF8C1G2uRFWLrNId2JAF" alt="option" />
                                             <option>Já assiti</option>
-                                            <img src="https://media.graphassets.com/dF8C1G2uRFWLrNId2JAF" />
+                                            <img src="https://media.graphassets.com/dF8C1G2uRFWLrNId2JAF" alt="option" />
                                             <option>Ainda não assiti</option>
                                         </Escolha>
                                     </Select>

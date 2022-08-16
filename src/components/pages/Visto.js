@@ -103,17 +103,16 @@ const Icon = styled.img`
 
 
 const Input = styled.input`  
-    background-color:#585858;
-    position:relative;
-    bottom:72px;
-    left:819px;
-    z-index:1;
-    color:white;
-    border:none;
-    width:37%;
-    padding-top:10px;
-    padding-bottom:10px;
-    ::-webkit-input-placeholder  { color:white; }
+background-color:gray;
+position:relative;   
+top:10px;
+z-index:1;
+color:white;
+border:none;
+width:99%;
+padding-top:10px;
+padding-bottom:10px;
+::-webkit-input-placeholder  { color:white; }
 
     @media(max-width:924px){
         position:relative;
@@ -133,7 +132,7 @@ const Input = styled.input`
 export default class Visto extends React.Component {
     state = {
         assitidoList: [],
-        filterFilms:[],
+        filterFilms: [],
     }
 
     async componentDidMount() {
@@ -146,24 +145,23 @@ export default class Visto extends React.Component {
 
         console.log("assistidos", this.state.assitidoList)
 
-
     }
-
-    Search = (event) => {
-        if (event.target.value !== 0) {
-            const { assitidoList } = this.state;
-            const filterFilms = assitidoList.filter((item) => {
-                if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
-                    return true;
-                }
-            })
-            this.setState({
-                assitidoList: filterFilms,
-
-            })
-        }
-    }
-
+    //Array.prototype.filter() expects a value to be returned at the end of arrow function 
+    /* Search = (event) => {
+           if (event.target.value !== 0) {
+               const { assitidoList } = this.state;
+               const filterFilms = assitidoList.filter((item) => {
+                   if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                       return true;
+                   }
+               })
+               this.setState({
+                   assitidoList: filterFilms,
+   
+               })
+           }
+       }
+   */
 
 
     render() {

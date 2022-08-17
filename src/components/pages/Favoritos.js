@@ -141,7 +141,7 @@ export default class Favoritos extends React.Component {
     async componentDidMount() {
 
         var List = localStorage.getItem("favoriteFilms")
-        var fav = localStorage.getItem("filmFavorite");
+       // var fav = localStorage.getItem("filmFavorite");
 
         const listFilm = JSON.parse(List)
         //  const favFilm = JSON.parse(fav)
